@@ -18,3 +18,26 @@ index.html
 # Avoid your project being littered with annoying .DS_Store files!
 .DS_Store
 .prettierignore
+
+# Dependencies
+node_modules
+jspm_packages
+
+package-lock.json
+*/**/yarn.lock
+/.yarn
+
+# Logs
+*.log
+
+# Temp directories
+.temp
+.tmp
+.cache
+
+# Generated dirs
+dist
+.nuxt
+.nuxt-*
+.output
+.gen

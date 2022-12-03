@@ -26,6 +26,7 @@ jspm_packages
 package-lock.json
 */**/yarn.lock
 /.yarn
+yarn.lock
 
 # Logs
 *.log

@@ -23,6 +23,7 @@ module.exports = {
           300: "hsl(217, 100%, 97%)",
           400: "hsl(231, 100%, 99%)",
         },
+        ...defaultTheme.colors,
       },
       fontFamily: {
         sans: ["Ubuntu", ...defaultTheme.fontFamily.sans],

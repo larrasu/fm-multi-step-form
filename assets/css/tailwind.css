@@ -4,6 +4,30 @@
 
 @layer base {
   body {
-    @apply bg-accent-100 antialiased;
+    @apply bg-accent-300 antialiased;
+  }
+  label {
+    @apply text-primary-100 text-sm;
+  }
+  [type="text"] {
+    @apply focus:border-primary-200 border-accent-200 rounded text-primary-100;
+  }
+}
+
+@layer components {
+  .input-group {
+    @apply grid;
+  }
+  .label-msg {
+    @apply flex justify-between items-center text-sm;
+  }
+  .label-msg span {
+    @apply text-primary-red;
+  }
+  .btn {
+    @apply rounded desktop:rounded-md;
+  }
+  .btn-primary {
+    @apply bg-primary-100 text-white hover:bg-primary-100/90 px-5 py-3;
   }
 }

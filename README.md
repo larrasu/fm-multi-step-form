@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Link](https://www.frontendmentor.io/solutions/multistep-form-using-nuxt-and-tailwind-css-oHtiyIwaZL)
 - Live Site URL: [Link](https://fm-multi-step-form.vercel.app/)
 
 ## My process

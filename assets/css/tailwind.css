@@ -6,37 +6,62 @@
   body {
     @apply bg-accent-300 antialiased;
   }
+  h1 {
+    @apply font-bold text-3xl text-primary-100;
+  }
   label {
     @apply text-primary-100 text-sm;
   }
-  [type="text"] {
-    @apply focus:border-primary-200 border-accent-200 rounded text-primary-100;
+  [type="text"],
+  [type="email"] {
+    @apply focus:border-primary-200 border-accent-200 rounded text-primary-100 w-full md:text-lg;
+  }
+  [type="checkbox"] {
+    @apply text-primary-200 rounded;
   }
 }
 
 @layer components {
+  .step-no {
+    @apply px-2.5 py-1 border border-white rounded-full text-accent-200 font-bold text-sm;
+  }
   .input-group {
     @apply grid;
+  }
+  .input-group input {
+    @apply mt-1;
   }
   .label-msg {
     @apply flex justify-between items-center text-sm;
   }
   .label-msg span {
-    @apply text-primary-red;
+    @apply text-primary-red hidden;
   }
   .btn {
-    @apply rounded desktop:rounded-md;
+    @apply rounded md:rounded-md text-sm md:text-base transition;
   }
   .btn-primary {
-    @apply bg-primary-100 text-white hover:bg-primary-100/90 px-5 py-3;
+    @apply bg-primary-100 text-white  hover:bg-primary-100/90 px-5 py-3;
+  }
+  .btn-accent {
+    @apply bg-primary-200 text-white  hover:bg-primary-200/90 px-5 py-3;
+  }
+  .btn-link {
+    @apply text-accent-100 hover:text-primary-100;
   }
   .plan {
-    @apply flex items-center gap-3 px-4 py-3 border rounded cursor-pointer border-accent-200 peer-checked:border-primary-200 peer-checked:bg-primary-200/5;
+    @apply w-full flex items-center gap-3 px-4 py-3 border rounded-lg cursor-pointer border-accent-200 hover:border-primary-200 peer-checked:border-primary-200 peer-checked:bg-primary-200/5 transition-all md:flex-col md:items-start md:justify-between md:h-44;
   }
   .plan div > :first-child {
-    @apply text-primary-100 font-bold;
+    @apply text-primary-100 font-bold md:text-lg;
+  }
+  .plan div > :nth-child(2) {
+    @apply text-accent-100;
   }
   .plan div > :last-child {
-    @apply text-accent-100;
+    @apply text-primary-100 text-sm;
+  }
+  .addon {
+    @apply flex items-center gap-4 border border-accent-100 px-4 py-3 rounded peer-checked:border-primary-200;
   }
 }

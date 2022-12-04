@@ -6,7 +6,12 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", href: "/favicon-32x32.png" }],
     },
   },
-  modules: ["@nuxtjs/google-fonts", "@nuxtjs/tailwindcss", "@vueuse/nuxt"],
+  modules: [
+    "@nuxtjs/google-fonts",
+    "nuxt-headlessui",
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+  ],
   googleFonts: {
     families: {
       Ubuntu: [400, 500, 700],

@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        mobile: "url('~/assets/images/bg-sidebar-mobile.svg')",
-        desktop: "url('~/assets/images/bg-sidebar-desktop.svg')",
+        mobile: "url('~assets/images/bg-sidebar-mobile.svg')",
+        desktop: "url('~assets/images/bg-sidebar-desktop.svg')",
       },
       colors: {
         primary: {
@@ -27,10 +27,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Ubuntu", ...defaultTheme.fontFamily.sans],
-      },
-      screens: {
-        mobile: "375px",
-        desktop: "1440px",
       },
     },
   },

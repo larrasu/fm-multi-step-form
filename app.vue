@@ -3,14 +3,20 @@
     class="flex flex-col h-screen md:justify-center justify-between max-w-[940px] mx-auto relative"
   >
     <!-- Desktop Container -->
-    <main class="md:bg-white md:rounded-2xl p-5 md:shadow-lg">
-      <div class="flex md:flex-row flex-col gap-4">
+    <main class="p-5 md:bg-white md:rounded-2xl md:shadow-lg">
+      <div class="flex flex-col gap-4 md:flex-row">
         <!-- Mobile Sidebar -->
         <div
           class="md:hidden bg-mobile w-full h-[172px] absolute top-0 left-0 bg-cover -z-10"
         ></div>
-        <div class="z-5 flex md:hidden justify-center gap-4 py-5">
-          <div v-for="step of stepsInfo" class="step-no">
+        <div class="flex justify-center gap-4 py-5 z-5 md:hidden">
+          <div
+            v-for="step of stepsInfo"
+            class="step-no"
+            :class="
+              currentStep == step.no ? 'text-primary-100 bg-primary-400' : ''
+            "
+          >
             {{ step.no }}
           </div>
         </div>
@@ -19,7 +25,7 @@
         <div
           class="md:bg-desktop bg-cover w-[274px] h-[568px] rounded-xl hidden md:block"
         >
-          <div class="grid p-10 gap-6">
+          <div class="grid gap-6 p-10">
             <div v-for="step of stepsInfo">
               <div class="flex items-center gap-4">
                 <div
@@ -32,11 +38,11 @@
                 >
                   {{ step.no }}
                 </div>
-                <div class="uppercase text-sm">
-                  <p class="text-primary-300 font-light text-xs">
+                <div class="text-sm uppercase">
+                  <p class="text-xs font-light text-primary-300">
                     Step {{ step.no }}
                   </p>
-                  <p class="text-accent-300 font-bold tracking-widest">
+                  <p class="font-bold tracking-widest text-accent-300">
                     {{ step.head }}
                   </p>
                 </div>
@@ -46,9 +52,11 @@
         </div>
         <!-- End of Desktop Sidebar -->
         <!-- Content -->
-        <div class="p-5 bg-white rounded-md flex-1 z-10">
+        <div
+          class="z-10 flex-1 p-5 bg-white rounded-lg shadow-lg md:shadow-none"
+        >
           <div
-            class="flex flex-col md:justify-between h-full gap-4 md:w-4/5 mx-auto"
+            class="flex flex-col h-full gap-4 mx-auto md:justify-between md:w-4/5"
           >
             <!-- Heading -->
             <div v-for="step of stepsInfo" v-show="currentStep == step.no">
@@ -63,13 +71,18 @@
                 <div class="input-group">
                   <div class="label-msg">
                     <label for="name">Name</label>
-                    <span>The field is required</span>
+                    <span :class="nameValid ? 'hidden' : 'block'"
+                      >The field is required</span
+                    >
                   </div>
                   <input
                     type="text"
                     id="name"
                     v-model="name"
                     placeholder="e.g. Stephen King"
+                    :class="
+                      nameValid ? 'border-accent-200' : 'border-primary-red'
+                    "
                   />
                 </div>
                 <!-- End of Name -->
@@ -77,13 +90,18 @@
                 <div class="input-group">
                   <div class="label-msg">
                     <label for="email">Email Address</label>
-                    <span>The field is required</span>
+                    <span :class="emailValid ? 'hidden' : 'block'"
+                      >The field is required</span
+                    >
                   </div>
                   <input
                     type="email"
                     id="email"
                     v-model="email"
                     placeholder="e.g. stephenking@lorem.com"
+                    :class="
+                      emailValid ? 'border-accent-200' : 'border-primary-red'
+                    "
                   />
                 </div>
                 <!-- End of Email -->
@@ -91,13 +109,18 @@
                 <div class="input-group">
                   <div class="label-msg">
                     <label for="phone">Phone Number</label>
-                    <span>The field is required</span>
+                    <span :class="phoneValid ? 'hidden' : 'block'"
+                      >The field is required</span
+                    >
                   </div>
                   <input
                     type="text"
                     id="phone"
                     v-model="phone"
                     placeholder="e.g. +1 234 567 890"
+                    :class="
+                      phoneValid ? 'border-accent-200' : 'border-primary-red'
+                    "
                   />
                 </div>
                 <!-- End of Phone Number -->
@@ -106,7 +129,7 @@
             <!-- End of Step 1 -->
             <!-- Step 2 -->
             <section v-show="currentStep == 2">
-              <div class="grid md:grid-cols-3 gap-4">
+              <div class="grid gap-4 md:grid-cols-3">
                 <div v-for="plan of plans">
                   <input
                     type="radio"
@@ -125,13 +148,15 @@
                           planType == false ? "mo" : "yr"
                         }}
                       </p>
-                      <p v-show="planType">2 months free</p>
+                      <p v-show="planType" class="text-primary-100">
+                        2 months free
+                      </p>
                     </div>
                   </label>
                 </div>
 
-                <div class="bg-accent-300 rounded-lg px-5 py-4 md:col-span-3">
-                  <div class="flex items-center gap-4 justify-center">
+                <div class="px-5 py-4 rounded-lg bg-accent-300 md:col-span-3">
+                  <div class="flex items-center justify-center gap-4">
                     <p
                       class="font-bold transition"
                       :class="
@@ -142,11 +167,11 @@
                     </p>
                     <HeadlessSwitch
                       v-model="planType"
-                      class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-100"
+                      class="relative inline-flex items-center h-6 rounded-full w-11 bg-primary-100"
                     >
                       <span
                         :class="planType ? 'translate-x-6' : 'translate-x-1'"
-                        class="inline-block h-4 w-4 transform rounded-full bg-white transition"
+                        class="inline-block w-4 h-4 transition transform bg-white rounded-full"
                       />
                     </HeadlessSwitch>
                     <p
@@ -162,13 +187,103 @@
             <!-- End of Step 2 -->
             <!-- Step 3 -->
             <section v-show="currentStep == 3">
-              <div>
-                <div></div>
+              <div class="grid gap-4">
+                <label v-for="addon of addons" class="addon" :for="addon.value">
+                  <input
+                    type="checkbox"
+                    class="peer"
+                    :id="addon.value"
+                    :name="addon.value"
+                    :value="addon"
+                    v-model="selectedAddons"
+                  />
+                  <div>
+                    <p class="font-bold text-primary-100">{{ addon.title }}</p>
+                    <p class="text-sm text-accent-100">{{ addon.desc }}</p>
+                  </div>
+                  <p class="ml-auto text-primary-200">
+                    ${{ planType ? addon.yearly : addon.monthly }}/{{
+                      planType ? "yr" : "mo"
+                    }}
+                  </p>
+                </label>
               </div>
             </section>
             <!-- End of Step 3 -->
+            <!-- Step 4 -->
+            <div v-show="currentStep == 4">
+              <div class="grid gap-4 p-5 rounded-lg bg-accent-300">
+                <div
+                  v-for="plan of plans"
+                  v-show="selectedPlan == plan.name"
+                  class="flex items-center justify-between"
+                >
+                  <div>
+                    <p class="font-bold text-primary-100">
+                      {{ plan.title }} ({{ planType ? "Yearly" : "Monthly" }})
+                    </p>
+                    <button
+                      class="underline text-accent-100 hover:text-primary-200"
+                      @click="currentStep = 2"
+                    >
+                      Change
+                    </button>
+                  </div>
+                  <p class="font-bold text-primary-100">
+                    ${{ planType ? plan.yearly : plan.monthly }}/{{
+                      planType ? "yr" : "mo"
+                    }}
+                  </p>
+                </div>
+                <div
+                  class="grid"
+                  :class="
+                    selectedAddons != ''
+                      ? 'gap-2 pt-4 border-t border-accent-200'
+                      : ''
+                  "
+                >
+                  <div
+                    v-for="addon of selectedAddons"
+                    class="flex items-center justify-between"
+                  >
+                    <p class="text-accent-100">{{ addon.title }}</p>
+                    <p class="text-primary-100">
+                      +${{ planType ? addon.yearly : addon.monthly }}/{{
+                        planType ? "yr" : "mo"
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-5">
+                <p class="text-accent-100">
+                  Total (per {{ planType ? "year" : "month" }})
+                </p>
+                <p class="font-bold text-primary-200">
+                  +${{ total }}/{{ planType ? "yr" : "mo" }}
+                </p>
+              </div>
+            </div>
+            <!-- End of Step 4 -->
+            <!-- Step 5 -->
+            <div
+              v-show="currentStep == 5"
+              class="flex flex-col justify-center h-full text-center itesm-center"
+            >
+              <img src="/images/icon-thank-you.svg" class="mx-auto" />
+              <h1 class="mt-6 mb-2">Thank you!</h1>
+              <p class="text-accent-100">
+                Thanks for confirming your subscription! We hope you have fun
+                using our platform. If you ever need support, please feel free
+                to email us at support@loremgaming.com.
+              </p>
+            </div>
             <!-- Content Footer -->
-            <div class="hidden md:flex justify-between mt-auto">
+            <div
+              class="justify-between hidden mt-auto md:flex"
+              v-show="currentStep != 5"
+            >
               <button
                 class="btn btn-link"
                 @click="goBack"
@@ -177,7 +292,7 @@
                 Go Back
               </button>
               <button
-                class="btn btn-primary ml-auto"
+                class="ml-auto btn btn-primary"
                 @click="nextStep"
                 v-show="currentStep < 4"
               >
@@ -199,30 +314,53 @@
     </main>
 
     <!-- Footer -->
-    <div class="w-full bg-white p-5 md:hidden flex justify-between">
-      <button class="btn btn-link" @click="goBack" v-show="currentStep > 1">
-        Go Back
-      </button>
-      <button
-        class="btn btn-primary ml-auto"
-        @click="nextStep"
-        v-show="currentStep < 4"
-      >
-        Next Step
-      </button>
-      <button class="btn btn-accent" @click="confirm" v-show="currentStep >= 4">
-        Confirm
-      </button>
+    <div class="w-full p-5 bg-white" v-show="currentStep != 5">
+      <div class="flex justify-between md:hidden">
+        <button class="btn btn-link" @click="goBack" v-show="currentStep > 1">
+          Go Back
+        </button>
+        <button
+          class="ml-auto btn btn-primary"
+          @click="nextStep"
+          v-show="currentStep < 4"
+        >
+          Next Step
+        </button>
+        <button
+          class="btn btn-accent"
+          @click="confirm"
+          v-show="currentStep >= 4"
+        >
+          Confirm
+        </button>
+      </div>
+      <div class="block mt-4 text-xs text-center text-accent-100 md:hidden">
+        Challenge by
+        <a
+          href="https://www.frontendmentor.io?ref=challenge"
+          target="_blank"
+          class="underline"
+          >Frontend Mentor</a
+        >. Coded by
+        <a href="https://larrasu.github.io" target="_blank" class="underline"
+          >Larra Su</a
+        >.
+      </div>
     </div>
     <!-- End of Footer -->
 
     <!-- End of Desktop Container -->
-    <div class="text-xs text-center text-accent-100 mt-4 hidden md:block">
+    <div class="hidden mt-4 text-xs text-center text-accent-100 md:block">
       Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+      <a
+        href="https://www.frontendmentor.io?ref=challenge"
+        target="_blank"
+        class="underline"
         >Frontend Mentor</a
       >. Coded by
-      <a href="https://larrasu.github.io" class="underline">Larra Su</a>.
+      <a href="https://larrasu.github.io" target="_blank" class="underline"
+        >Larra Su</a
+      >.
     </div>
   </div>
 </template>
@@ -231,11 +369,30 @@
 const currentStep = ref(1);
 const name = ref("");
 const email = ref("");
-const phone = ref();
+const phone = ref("");
 const selectedPlan = ref("arcade");
 const planType = ref(false);
 const selectedAddons = ref([]);
 const total = ref(0);
+
+const nameValid = ref(true);
+const emailValid = ref(true);
+const phoneValid = ref(true);
+
+total.value = computed(() => {
+  let total = 0;
+  if (selectedPlan.value == "arcade") {
+    total += planType.value ? 90 : 9;
+  } else if (selectedPlan.value == "advanced") {
+    total += planType.value ? 120 : 12;
+  } else if (selectedPlan.value == "pro") {
+    total += planType.value ? 150 : 15;
+  }
+  selectedAddons.value.forEach((addon) => {
+    total += planType.value ? addon.yearly : addon.monthly;
+  });
+  return total;
+});
 
 const stepsInfo = [
   {
@@ -316,10 +473,31 @@ function goBack() {
 }
 
 function nextStep() {
-  currentStep.value++;
+  if (currentStep.value == 1) {
+    if (name.value == "") {
+      nameValid.value = false;
+    } else {
+      nameValid.value = true;
+    }
+    if (email.value == "") {
+      emailValid.value = false;
+    } else {
+      emailValid.value = true;
+    }
+    if (phone.value == "") {
+      phoneValid.value = false;
+    } else {
+      phoneValid.value = true;
+    }
+    if (nameValid.value && emailValid.value && phoneValid.value) {
+      currentStep.value++;
+    }
+  } else if (currentStep.value >= 2 && currentStep.value < 4) {
+    currentStep.value++;
+  }
 }
 
 function confirm() {
-  currentStep.value = "complete";
+  currentStep.value = 5;
 }
 </script>

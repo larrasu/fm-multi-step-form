@@ -44,6 +44,7 @@ Users should be able to:
 
 - [Nuxt](https://nuxt.com/) - Vue Framework
 - [Tailwind CSS](https://tailwindcss.com) - CSS Framework
+- [Headless UI](https://headlessui.dev) - Tailwind Component Library
 
 ### What I learned
 
